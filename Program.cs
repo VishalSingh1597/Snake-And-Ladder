@@ -8,35 +8,45 @@ namespace SnakeAndLadder
 {
     class Program
     {
-        const int Startposition = 0;    //starting position 0
-        const int NO_PLAY = 1;
-        const int LADDER = 2;
-        const int SNAKE = 3;
-
-        static void Main(string[] args)
-        {  //Entery point
-            Random random = new Random();
-            int option = random.Next(1, 4); //random value genreted 1-3
-            int dieValue = random.Next(1, 7); //random value genreted 1-6
-            Console.WriteLine("Player Roll Dies:" + dieValue);
-            int CurrentPosition = 0;
-
-            switch (option)   //start switch
+        int START_POSITION = 0; // Declare integer start position in 0
+        const int NoPlay = 0;
+        const int Ladder = 1;
+        const int Snakle = 2;
+        public void PlayGame()
+        {
+            Random random = new Random(); //Generate random integers in range 0 to 6
+            int Die = random.Next(1, 6);    // Random Value Generate 1 to 6
+            int Option = random.Next(0, 3); // Random generate 0 to 3 value
+            int Player = 0;
+            switch (Option) // use switch casw for option Random value
             {
-                case NO_PLAY:
-                    Console.WriteLine("No Play");
+                case NoPlay:
+                    Console.WriteLine("No Play, Pass the chance"); // Print  
                     break;
-                case LADDER:
-                    CurrentPosition = dieValue + CurrentPosition;
-                    Console.WriteLine("You got Ladder \n player position = " + CurrentPosition);
+                case Ladder:
+                    Player = Die; // 
+                    Console.WriteLine("You got Ladder \n Player position = " + Player); // Print player value random genrate
                     break;
-                case SNAKE:
-                    CurrentPosition = CurrentPosition - dieValue;
-                    Console.WriteLine("You gotSnake \n player position = " + CurrentPosition);
+                case Snakle:
+                    Player -= Die;
+                    if (Player < START_POSITION) //Check Lessthan Start Position
+                    {
+                        Player = START_POSITION; // Player value = Start Value
+                    }
+                    Console.WriteLine("You gotSnake \n player position = " + Player);
+
                     break;
 
-            } //end switch
+            }
+            Console.WriteLine(" Player Die Roll Position :- " + Die);                   //Print Random value
+            Console.WriteLine(" Single Player Start_Position:- " + START_POSITION);     //Print Start Position
             Console.ReadLine();
+        }
+        static void Main(string[] args)//Main method
+        {
+            Program StartPlay = new Program(); // Calling Method
+            StartPlay.PlayGame();//method PlaGame
+
         }
     }
 }
